@@ -17,7 +17,7 @@ export const Header = () => {
       >
         <Typography
           component="h1"
-          variant="h3"
+          variant="h4"
           sx={{
             p: 2,
             letterSpacing: '0.25rem',
