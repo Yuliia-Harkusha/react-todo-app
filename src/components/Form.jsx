@@ -54,6 +54,7 @@ export const Form = ({ todos, setTodos }) => {
               bgcolor: 'primary.light',
             },
           }}
+          onClick={handleSubmit}
         >
           Add task
         </Button>
