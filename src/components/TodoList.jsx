@@ -4,12 +4,26 @@ import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 
-export const TodoList = ({ todos, setTodos }) => {
+export const TodoList = ({ todos, setTodos, setEdit }) => {
   const handleDelete = ({ id }) => {
     setTodos(todos.filter(todo => todo.id !== id));
   };
 
-  const handleComplete = ({ id }) => {};
+  const handleEdit = ({ id }) => {
+    const findTodo = todos.find(todo => todo.id === id);
+    setEdit(findTodo);
+  };
+
+  const handleComplete = todo => {
+    setTodos(
+      todos.map(item => {
+        if (item.id === todo.id) {
+          return { ...item, completed: !item.completed };
+        }
+        return item;
+      })
+    );
+  };
 
   return (
     <Box
@@ -51,7 +65,7 @@ export const TodoList = ({ todos, setTodos }) => {
               sx={{ mr: 1 }}
               onChange={e => e.preventDefault()}
             />
-            <Button size="small">
+            <Button size="small" onClick={() => handleEdit(todo)}>
               <ModeEditIcon color="secondary" />
             </Button>
             <Button size="small" onClick={() => handleDelete(todo)}>

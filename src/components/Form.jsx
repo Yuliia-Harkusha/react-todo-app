@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { Box, TextField, Button } from '@mui/material';
 
-export const Form = ({ todos, setTodos }) => {
+export const Form = ({ todos, setTodos, edit, setEdit }) => {
   const [input, setInput] = useState('');
+
+  const updateTodo = (id, text, completed) => {
+    const newTodo = todos.map(todo => {
+      return todo.id === id ? { id, text, completed } : todo;
+    });
+    setTodos(newTodo);
+    setEdit('');
+  };
+
+  useEffect(() => {
+    if (edit) {
+      setInput(edit.text);
+    } else {
+      setInput('');
+    }
+  }, [setInput, edit]);
 
   const handleChange = e => {
     setInput(e.target.value);
@@ -12,8 +28,12 @@ export const Form = ({ todos, setTodos }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    setTodos([{ id: nanoid(), text: input, completed: false }, ...todos]);
-    setInput('');
+    if (!edit) {
+      setTodos([{ id: nanoid(), text: input, completed: false }, ...todos]);
+      setInput('');
+    } else {
+      updateTodo(input, edit.id, edit.completed);
+    }
   };
 
   return (
@@ -39,8 +59,8 @@ export const Form = ({ todos, setTodos }) => {
           sx={{
             maxWidth: '800px',
           }}
-          onChange={handleChange}
           value={input}
+          onChange={handleChange}
         />
         <Button
           disableElevation
@@ -57,7 +77,7 @@ export const Form = ({ todos, setTodos }) => {
           }}
           onClick={handleSubmit}
         >
-          Add task
+          {edit ? 'OK' : 'Add'}
         </Button>
       </Box>
     </div>
