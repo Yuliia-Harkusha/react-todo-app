@@ -61,12 +61,14 @@ export const Form = ({ todos, setTodos, edit, setEdit }) => {
             maxWidth: '800px',
           }}
           value={input}
+          required
           onChange={handleChange}
         />
         <Button
           disableElevation
           variant="contained"
           size="small"
+          type="submit"
           sx={{
             p: 1,
             ml: 2,
@@ -76,7 +78,6 @@ export const Form = ({ todos, setTodos, edit, setEdit }) => {
               bgcolor: 'primary.accent',
             },
           }}
-          onClick={handleSubmit}
         >
           {edit ? 'OK' : 'Add'}
         </Button>
