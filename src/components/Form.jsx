@@ -6,7 +6,7 @@ import { Box, TextField, Button } from '@mui/material';
 export const Form = ({ todos, setTodos, edit, setEdit }) => {
   const [input, setInput] = useState('');
 
-  const updateTodo = (id, text, completed) => {
+  const updateTodo = ({ id, text, completed }) => {
     const newTodo = todos.map(todo => {
       return todo.id === id ? { id, text, completed } : todo;
     });
@@ -51,6 +51,7 @@ export const Form = ({ todos, setTodos, edit, setEdit }) => {
         onSubmit={handleSubmit}
       >
         <TextField
+          fullWidth
           label="Enter the task here"
           size="small"
           type="text"
