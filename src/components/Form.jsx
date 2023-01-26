@@ -24,6 +24,7 @@ export const Form = ({ todos, setTodos }) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
+          maxWidth: '100%',
           mt: 4,
           mb: 4,
         }}
@@ -36,7 +37,7 @@ export const Form = ({ todos, setTodos }) => {
           name="todo"
           color="secondary"
           sx={{
-            width: '500px',
+            maxWidth: '800px',
           }}
           onChange={handleChange}
           value={input}
@@ -51,7 +52,7 @@ export const Form = ({ todos, setTodos }) => {
             bgcolor: 'primary.main',
             color: 'primary.lightText',
             '&:hover': {
-              bgcolor: 'primary.light',
+              bgcolor: 'primary.accent',
             },
           }}
           onClick={handleSubmit}

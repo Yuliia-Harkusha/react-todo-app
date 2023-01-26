@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider, Container } from '@mui/material';
 import { theme } from './Theme';
 import { Header } from './Header';
 import { Form } from './Form';
@@ -11,8 +11,10 @@ export const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <Form todos={todos} setTodos={setTodos} />
-      <TodoList todos={todos} setTodos={setTodos} />
+      <Container maxWidth="sm" sx={{ p: 2 }}>
+        <Form todos={todos} setTodos={setTodos} />
+        <TodoList todos={todos} setTodos={setTodos} />
+      </Container>
     </ThemeProvider>
   );
 };
